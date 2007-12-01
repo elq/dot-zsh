@@ -1,0 +1,9 @@
+
+export PS1="%n@%m:%~>"
+export PATH=~/bin/:/opt/local/bin/:/usr/local/mysql/bin:/opt/hg/bin:$PATH
+export VISUAL=vim
+export MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/man:/opt/local/man
+
+#i can haz grep colerz?
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='1;36'
