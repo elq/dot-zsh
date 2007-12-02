@@ -1,0 +1,83 @@
+
+bindkey ^f  history-incremental-search-backward
+
+#
+# zsh completions
+#
+autoload -U compinit
+compinit
+
+#local _myhosts
+_myhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+zstyle ':completion:*' hosts $_myhosts
+
+# SSH Completion
+zstyle ':completion:*:scp:*' tag-order \
+   files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+zstyle ':completion:*:scp:*' group-order \
+   files all-files users hosts-domain hosts-host hosts-ipaddr
+zstyle ':completion:*:ssh:*' tag-order \
+   users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
+zstyle ':completion:*:ssh:*' group-order \
+   hosts-domain hosts-host users hosts-ipaddr
+zstyle '*' single-ignored show
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*'   force-list always
+
+# Filename suffixes to ignore during completion (except after rm command)
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*~' '\#*', '.\#*'
+
+# allow completion on process names :) thanks to zshwiki
+zstyle ':completion:*:processes-names' command  'ps c -u ${USER} -o command | uniq'
+
+#allow tab completion in the middle of a word
+setopt COMPLETE_IN_WORD
+
+#treat "/etc" as "cd /etc"...
+setopt AUTO_CD
+
+autoload -U tcp_open
+autoload -U zmv
+
+
+ulimit -c unlimited
+
+
+## keep background processes at full speed
+#setopt NOBGNICE
+## restart running processes on exit
+#setopt HUP
+
+## never ever beep ever
+#setopt NO_BEEP
+
+## automatically decide when to page a list of completions
+#LISTMAX=0
+
+## disable mail checking
+#MAILCHECK=0
+
+autoload -U colors
+colors
+
+
+setopt INC_APPEND_HISTORY SHARE_HISTORY
+setopt APPEND_HISTORY
+unsetopt BG_NICE                # do NOT nice bg commands
+setopt CORRECT                        # command CORRECTION
+setopt EXTENDED_HISTORY                # puts timestamps in the history
+
+HISTFILE=~/.zsh/zhistory
+HISTSIZE=2500
+SAVEHIST=2500
+
+#never ever ever beep on ambiguous list completions
+setopt NO_LIST_BEEP
