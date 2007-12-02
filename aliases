@@ -17,6 +17,22 @@ alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
 
+alias -s org=w3m
+alias -s com=w3m
+alias -s net=w3m
+
+alias -g C='| wc -l'
+alias -g DN=/dev/null
+alias -g L="| less"
+alias -g LS='| less -S'
+alias -g NE="2> /dev/null"
+alias -g S='| sort'
+alias -g TL='| tail -20'
+alias -g T='| tail'
+
+alias rmold='rm -vf .*~ *~ \#*\#'
+
+
 function + {
         pushd .
 }
