@@ -30,8 +30,7 @@ alias -g S='| sort'
 alias -g TL='| tail -20'
 alias -g T='| tail'
 
-alias rmold='rm -vf .*~ *~ \#*\#'
-
+alias mmv='noglob zmv -W'
 
 function + {
         pushd .
