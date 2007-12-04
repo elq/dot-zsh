@@ -20,6 +20,7 @@ alias -g .....=../../../..
 alias -s org=w3m
 alias -s com=w3m
 alias -s net=w3m
+alias -s txt=less
 
 alias -g C='| wc -l'
 alias -g DN=/dev/null
