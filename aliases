@@ -33,13 +33,14 @@ alias -g T='| tail'
 
 alias mmv='noglob zmv -W'
 
-function + {
-        pushd .
-}
-
-function _ {
-        popd
-}
-
+# chmod 
+#a2# Execute \kbd{chmod 600}
+alias rw-='chmod 600'
+#a2# Execute \kbd{chmod 700}
+alias rwx='chmod 700'
+#m# a2 r-{}- Execute \kbd{chmod 644}
+alias r--='chmod 644'
+#a2# Execute \kbd{chmod 755}
+alias r-x='chmod 755'
 
 source ~/.zsh/git.aliases
