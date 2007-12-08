@@ -160,3 +160,20 @@ sudo-command-line() {
 zle -N sudo-command-line
 #k# Put the current command line into a \kbd{sudo} call
 bindkey "^Os" sudo-command-line
+
+
+# searching
+#f4# Search for newspostings from authors
+agoogle() { ${=BROWSER} "http://groups.google.com/groups?as_uauthors=$*" ; }
+#f4# Search DMOZ
+dmoz()    { ${=BROWSER} http://search.dmoz.org/cgi-bin/search\?search=${1// /_} }
+#f4# Search English  Wiktionary
+wicti()  { ${=BROWSER} http://en.wiktionary.org/wiki/${(C)1// /_} }
+#f4# Search Google Groups
+ggogle()  { ${=BROWSER} "http://groups.google.com/groups?q=$*" }
+#f4# Search Google
+google()  { ${=BROWSER} "http://www.google.com/search?&num=100&q=$*" }
+#f4# Search Google Groups for MsgID
+mggogle() { ${=BROWSER} "http://groups.google.com/groups?selm=$*" }
+#f4# Search English  Wikipedia
+wiki()  { ${=BROWSER} http://en.wikipedia.org/wiki/"${(C)*}" }

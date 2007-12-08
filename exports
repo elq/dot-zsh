@@ -1,8 +1,21 @@
 export PS1="%n@%m:%~>"
-export PATH=~/bin/:/opt/local/bin/:/usr/local/mysql/bin:/opt/hg/bin:$PATH
-export VISUAL=vim
+export PATH=~/bin/:/usr/local/bin:/opt/local/bin/:/usr/local/mysql/bin:/opt/hg/bin:$PATH
+export VISUAL=emacsclient -a vim
 export MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/man:/opt/local/man
 
 #i can haz grep colerz?
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;36'
+
+#osx hack...
+export BROWSER=open
+
+if [ -z "$BROWSER" ] ; then
+    if [ -n "$DISPLAY" ] ; then
+        #v# If X11 is running
+        [ -x $(which firefox) ] && export BROWSER=firefox
+    else
+        #v# If no X11 is running
+        [ -x $(which w3m) ] && export BROWSER=w3m
+    fi
+fi
