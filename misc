@@ -46,7 +46,7 @@ setopt AUTO_CD
 
 autoload -U tcp_open
 autoload -U zmv
-autoload -U zle
+autoload -U zsh/zle
 
 ulimit -c unlimited
 
