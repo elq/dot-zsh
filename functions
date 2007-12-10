@@ -177,3 +177,5 @@ google()  { ${=BROWSER} "http://www.google.com/search?&num=100&q=$*" }
 mggogle() { ${=BROWSER} "http://groups.google.com/groups?selm=$*" }
 #f4# Search English  Wikipedia
 wiki()  { ${=BROWSER} http://en.wikipedia.org/wiki/"${(C)*}" }
+
+hdocs() { ${=BROWSER} "http://www.haskell.org/hoogle/?q=$*" }
