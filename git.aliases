@@ -1,3 +1,4 @@
+# -*- mode: shell-script -*-
 alias gst='git status'
 alias gl='git pull'
 alias gp='git push'

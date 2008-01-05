@@ -1,3 +1,4 @@
+# -*- mode: shell-script -*-
 
 bindkey ^f  history-incremental-search-backward
 

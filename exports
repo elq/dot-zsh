@@ -1,3 +1,4 @@
+# -*- mode: shell-script -*-
 export PS1="%n@%m:%~>"
 export PATH=~/bin/:/usr/local/bin:/opt/local/bin/:/usr/local/mysql/bin:/opt/hg/bin:$PATH
 export VISUAL="emacsclient -a vim"

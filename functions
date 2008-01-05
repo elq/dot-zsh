@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 # list images only
 limg() {
     local -a images
@@ -14,7 +16,7 @@ new() { print -l *(m-$1) }
 
 # Clean up directory - remove well known tempfiles
 purge() {
-    FILES=(*~(N) .*~(N) \#*\#(N) *.o(N) a.out(N) *.core(N) *.cmo(N) *.cmi(N) .*.swp(N))
+    FILES=(*~(N) .*~(N) \#*\#(N) *.o(N) a.out(N) *.core(N) *.cmo(N) *.cmi(N) .*.swp(N) semantic.cache)
     NBFILES=${#FILES}
     if [[ $NBFILES > 0 ]]; then
         print $FILES
@@ -161,6 +163,10 @@ zle -N sudo-command-line
 #k# Put the current command line into a \kbd{sudo} call
 bindkey "^Os" sudo-command-line
 
+
+rm-trash() {
+    `rm -fr ~/.Trash/*`
+}
 
 # searching
 #f4# Search for newspostings from authors
