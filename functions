@@ -16,7 +16,7 @@ new() { print -l *(m-$1) }
 
 # Clean up directory - remove well known tempfiles
 purge() {
-    FILES=(*~(N) .*~(N) \#*\#(N) *.o(N) a.out(N) *.core(N) *.cmo(N) *.cmi(N) .*.swp(N) semantic.cache)
+    FILES=(*~(N) .*~(N) \#*\#(N) *.o(N) a.out(N) *.core(N) *.cmo(N) *.cmi(N) .*.swp(N) semantic.cache(N))
     NBFILES=${#FILES}
     if [[ $NBFILES > 0 ]]; then
         print $FILES
