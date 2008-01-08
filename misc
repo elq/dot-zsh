@@ -1,6 +1,65 @@
 # -*- mode: shell-script -*-
 
+# check for versions (compatibility reasons)
+if autoload is-at-least && is-at-least 2>/dev/null ; then
+   is4() { is-at-least 4 }
+   is41() { is-at-least 4.1 }
+   is42() { is-at-least 4.2 }
+else
+  is4(){
+    [[ $ZSH_VERSION == 4.* ]] && return 0
+    return 1
+  }
+  is42(){
+    [[ $ZSH_VERSION == 4.<2->* ]] && return 0
+    return 1
+  }
+fi
+
+# completion system
+if autoload -U compinit && compinit 2>/dev/null ; then
+   compinit 2>/dev/null || print 'Notice: no compinit available :('
+ else
+   print 'Notice: no compinit available :('
+   function zstyle { }
+   function compdef { }
+fi
+
+is4 && autoload -U zed # use ZLE editor to edit a file or function
+is4 && for mod in complist deltochar mathfunc ; do
+             zmodload -i zsh/${mod} 2>/dev/null || print "Notice: no ${mod} available :("
+         done
+
+# autoload zsh modules when they are referenced
+if is4 ; then
+  tmpargs=(
+    a   stat
+    a   zpty
+    ap  zprof
+    ap  mapfile
+  )
+
+  while (( ${#tmpargs} > 0 )) ; do
+    zmodload -${tmpargs[1]} zsh/${tmpargs[2]} ${tmpargs[2]}
+    shift 2 tmpargs
+  done
+  unset tmpargs
+fi
+
+# run command line as user root via sudo:
+sudo-command-line() {
+  [[ -z $BUFFER ]] && zle up-history
+  [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
+}
+zle -N sudo-command-line
+# Put the current command line into a \kbd{sudo} call
+bindkey "^Os" sudo-command-line
+
+
 bindkey ^f  history-incremental-search-backward
+
+type compinit &>/dev/null || { autoload -U compinit && compinit }
+
 
 #
 # zsh completions
@@ -34,7 +93,7 @@ zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*'   force-list always
 
 # Filename suffixes to ignore during completion (except after rm command)
-zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*~' '\#*', '.\#*'
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*~' '\#*', '.\#*', 'semantic.cache'
 
 # allow completion on process names :) thanks to zshwiki
 zstyle ':completion:*:processes-names' command  'ps c -u ${USER} -o command | uniq'

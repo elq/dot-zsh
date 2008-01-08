@@ -23,6 +23,12 @@ alias -s com=w3m
 alias -s net=w3m
 alias -s txt=less
 
+alias j='jobs -l'
+alias CO="./configure"
+alias CH="./configure --help"
+
+
+
 alias -g C='| wc -l'
 alias -g DN=/dev/null
 alias -g L="| less"
@@ -45,3 +51,10 @@ alias r--='chmod 644'
 alias r-x='chmod 755'
 
 source ~/.zsh/git.aliases
+
+
+# send files via netcat
+# on sending side:
+send() {j=$*; tar cpz ${j/%${!#}/}|nc -w 1 ${!#} 51330;}
+#  send dir* $HOST
+alias receive='nc -vlp 51330 | tar xzvp'

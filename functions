@@ -186,3 +186,141 @@ wiki()  { ${=BROWSER} http://en.wikipedia.org/wiki/"${(C)*}" }
 
 hdocs() { ${=BROWSER} "http://www.haskell.org/hoogle/?q=$*" }
 alias hoogle=hdocs
+
+memusage() { ps aux | awk '{if (NR > 1) print $5; if (NR > 2) print "+"} END { print "p" }' | dc }
+
+# Checks whether a regex matches or not.\\&\quad Example: \kbd{regcheck '.\{3\} EUR' '500 EUR'}
+regcheck() {
+  zmodload -i zsh/pcre
+  pcre_compile $1 && \
+  pcre_match $2 && echo "regex matches" || echo "regex does not match"
+}
+
+# Jump between directories
+d(){
+  emulate -L zsh
+  autoload -U colors
+  local color=$fg_bold[blue]
+  integer i=0
+  dirs -p | while read dir; do
+    local num="${$(printf "%-4d " $i)/ /.}"
+    printf " %s  $color%s$reset_color\n" $num $dir
+    (( i++ ))
+  done
+  integer dir=-1
+  read -r 'dir?Jump to directory: ' || return
+  (( dir == -1 )) && return
+  if (( dir < 0 || dir >= i )); then
+    echo d: no such directory stack entry: $dir
+    return 1
+  fi
+  cd ~$dir
+} 
+
+# Smart archive extractor
+simple-extract () {
+      if [[ -f $1 ]]
+      then
+              case $1 in
+                      *.tar.bz2)  bzip2 -v -d $1      ;;
+                      *.tar.gz)   tar -xvzf $1        ;;
+                      *.rar)      unrar $1            ;;
+                      *.deb)      ar -x $1            ;;
+                      *.bz2)      bzip2 -d $1         ;;
+                      *.lzh)      lha x $1            ;;
+                      *.gz)       gunzip -d $1        ;;
+                      *.tar)      tar -xvf $1         ;;
+                      *.tgz)      gunzip -d $1        ;;
+                      *.tbz2)     tar -jxvf $1        ;;
+                      *.zip)      unzip $1            ;;
+                      *.Z)        uncompress $1       ;;
+                      *)          echo "'$1' Error. Please go away" ;;
+              esac
+      else
+              echo "'$1' is not a valid file"
+      fi
+}
+
+# List an archive's content
+show-archive() {
+      if [[ -f $1 ]]
+      then
+              case $1 in
+                      *.tar.gz)      gunzip -c $1 | tar -tf - -- ;;
+                      *.tar)         tar -tf $1 ;;
+                      *.tgz)         tar -ztf $1 ;;
+                      *.zip)         unzip -l $1 ;;
+                      *.bz2)         bzless $1 ;;
+                      *)             echo "'$1' Error. Please go away" ;;
+              esac
+      else
+              echo "'$1' is not a valid archive"
+      fi
+}
+
+# Report diskusage of a directory
+dirspace() {
+  if [ -n "$1" ] ; then
+     for dir in $* ; do
+        if [ -d "$dir" ] ; then
+           ( cd $dir; echo "-<$dir>"; du -shx .; echo);
+        else
+           echo "warning: $dir does not exist" >&2
+        fi
+     done
+  else
+      for dir in $path; do
+        if [ -d "$dir" ] ; then
+           ( cd $dir; echo "-<$dir>"; du -shx .; echo);
+        else
+           echo "warning: $dir does not exist" >&2
+        fi
+      done
+  fi
+}
+
+# Simple thumbnails generator
+genthumbs () {
+  rm -rf thumb-* index.html
+  echo "
+<html>
+  <head>
+    <title>Images</title>
+  </head>
+  <body>" > index.html
+    for f in *.(gif|jpeg|jpg|png)
+    do
+        convert -size 100x200 "$f" -resize 100x200 thumb-"$f"
+        echo "    <a href=\"$f\"><img src=\"thumb-$f\"></a>" >> index.html
+    done
+    echo "
+  </body>
+</html>" >> index.html
+}
+
+# RFC 2396 URL encoding in Z-Shell
+urlencode() {
+ setopt localoptions extendedglob
+ input=( ${(s::)1} )
+ print ${(j::)input/(#b)([^A-Za-z0-9_.!~*\'\(\)-])/%$(([##16]#match))}
+}
+
+# create small urls via tinyurl.com using wget, grep and sed
+zurl() {
+  [[ -z ${1} ]] && print "please give an url to shrink." && return 1
+  local url=${1}
+  local tiny="http://tinyurl.com/create.php?url="
+  #print "${tiny}${url}" ; return
+  wget  -O-             \
+        -o/dev/null     \
+        "${tiny}${url}" \
+    | grep -Eio 'value="(http://tinyurl.com/.*)"' \
+    | sed 's/value=//;s/"//g'
+}
+
+
+
+
+
+
+
