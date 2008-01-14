@@ -18,9 +18,9 @@ alias -g ...=../..
 alias -g ....=../../..
 alias -g .....=../../../..
 
-alias -s org=w3m
-alias -s com=w3m
-alias -s net=w3m
+alias -s org=lynx
+alias -s com=lynx
+alias -s net=lynx
 alias -s txt=less
 
 alias j='jobs -l'

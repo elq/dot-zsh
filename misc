@@ -102,8 +102,6 @@ autoload -U zsh/zle
 ulimit -c unlimited
 
 
-## keep background processes at full speed
-#setopt NOBGNICE
 ## restart running processes on exit
 #setopt HUP
 
