@@ -46,15 +46,6 @@ if is4 ; then
   unset tmpargs
 fi
 
-# run command line as user root via sudo:
-sudo-command-line() {
-  [[ -z $BUFFER ]] && zle up-history
-  [[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
-}
-zle -N sudo-command-line
-# Put the current command line into a \kbd{sudo} call
-bindkey "^Os" sudo-command-line
-
 
 bindkey ^f  history-incremental-search-backward
 
