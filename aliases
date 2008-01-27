@@ -1,4 +1,5 @@
 # -*- mode: shell-script -*-
+
 alias lf='ls -aF'
 alias l='ls -alh'
 alias cls='clear'
