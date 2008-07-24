@@ -87,7 +87,7 @@ zstyle ':completion:*:kill:*'   force-list always
 zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*~' '\#*', '.\#*', 'semantic.cache'
 
 # allow completion on process names :) thanks to zshwiki
-zstyle ':completion:*:processes-names' command  'ps c -u ${USER} -o command | uniq'
+zstyle ':completion:*:processes-names' command  'ps -u ${USER} -o command | uniq'
 
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD

@@ -4,6 +4,11 @@ export PATH=~/bin/:/usr/local/bin:/opt/local/bin/:/usr/local/mysql/bin:/opt/hg/b
 export VISUAL="emacsclient -a vim"
 export MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/man:/opt/local/man
 
+#path for jruby
+export PATH=$PATH:/Users/eric/src/jruby/bin
+export JRUBY_HOME=/Users/eric/src/jruby/
+
+
 #i can haz grep colerz?
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;36'
