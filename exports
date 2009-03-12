@@ -8,6 +8,9 @@ export MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/man:/opt/local/man
 export PATH=$PATH:/Users/eric/src/jruby/bin
 export JRUBY_HOME=/Users/eric/src/jruby/
 
+#matlab
+export PATH=$PATH:/Applications/MATLAB_2008a/bin
+
 
 #i can haz grep colerz?
 export GREP_OPTIONS='--color=auto'
