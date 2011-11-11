@@ -11,6 +11,7 @@ alias lsd='ls -al -d * | egrep "^d"'
 alias li='ls -ai1 | sort'
 alias dusk='du -h -s -k -c * | sort -rn'
 alias nsl='netstat -aln | grep -iv dgram | grep -iv stream | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'
+alias nstat='lsof -i TCP -i UDP'
 alias more=less
 #alias vi=vim
 alias fri='fri -P'

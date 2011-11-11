@@ -8,8 +8,15 @@ export MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/man:/opt/local/man
 export PATH=$PATH:/Users/eric/src/jruby/bin
 export JRUBY_HOME=/Users/eric/src/jruby/
 
+#adb
+export PATH=$PATH:~/src/android-sdk-mac/tools
+
 #matlab
 export PATH=$PATH:/Applications/MATLAB_2008a/bin
+
+#cuda
+export PATH=$PATH:/usr/local/cuda/bin
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/cuda/lib
 
 
 #i can haz grep colerz?
