@@ -1,22 +1,22 @@
 # -*- mode: shell-script -*-
 
-alias lf='ls -aF'
-alias l='ls -alh'
+alias ls='ls -F --color=never'
+alias lf='ls -aF --color=never'
+alias l='ls -alh --color=never'
 alias cls='clear'
 alias q='exit'
 alias h='history'
 
-alias lt='ls -alt | head -20'
+alias lt='ls -alht | head -20'
 alias lsd='ls -al -d * | egrep "^d"'
-alias li='ls -ai1 | sort'
-alias dusk='du -h -s -k -c * | sort -rn'
-alias nsl='netstat -aln | grep -iv dgram | grep -iv stream | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail +2'
-alias nstat='lsof -i TCP -i UDP'
+alias li='ls -ai1 | sort --color=never'
+alias dusk='du -skc * | sort -rn'
+alias nsl='netstat -aln | grep -iv dgram | grep -iv udp | grep -iv stream | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail -n +2'
+alias nsl2='netstat -al | grep -iv dgram | grep -iv udp | grep -iv stream | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail -n +2'
 alias more=less
-#alias vi=vim
-alias fri='fri -P'
+alias vi=vim
 
-alias ipython='ipython2.5'
+alias dirsize='for d in `find . -maxdepth 1  -type d | grep "./" | grep -v "\./\."` ; do du -hs $d; done'
 
 alias -g ...=../..
 alias -g ....=../../..
@@ -26,10 +26,14 @@ alias -s org=lynx
 alias -s com=lynx
 alias -s net=lynx
 alias -s txt=less
+alias -s conf=less
+alias -s properties=less
 
 alias j='jobs -l'
 alias CO="./configure"
 alias CH="./configure --help"
+
+alias ion="ionice -c 3 "
 
 
 
@@ -56,9 +60,13 @@ alias r-x='chmod 755'
 
 source ~/.zsh/git.aliases
 
-
 # send files via netcat
 # on sending side:
-send() {j=$*; tar cpz ${j/%${!#}/}|nc -w 1 ${!#} 51330;}
+send() {
+    j=$*; 
+    h=$*[$#]
+    f=$*[1,-2]
+    tar cpz $f| nc -w 1 $h 51330;
+}
 #  send dir* $HOST
 alias receive='nc -vlp 51330 | tar xzvp'

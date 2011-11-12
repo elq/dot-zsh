@@ -124,9 +124,10 @@ unsetopt BG_NICE                # do NOT nice bg commands
 setopt CORRECT                        # command CORRECTION
 
 
-HISTFILE=~/.zsh/zhistory
-HISTSIZE=2500
-SAVEHIST=2500
+HISTFILE=~/.zsh/hist/zhistory.$HOST
+HISTSIZE=10000
+SAVEHIST=10000
 
 #never ever ever beep on ambiguous list completions
 setopt NO_LIST_BEEP
+
