@@ -1,15 +1,15 @@
 # -*- mode: shell-script -*-
 
-alias ls='ls -F --color=never'
-alias lf='ls -aF --color=never'
-alias l='ls -alh --color=never'
+alias ls='ls -F'
+alias lf='ls -aF'
+alias l='ls -alh'
 alias cls='clear'
 alias q='exit'
 alias h='history'
 
 alias lt='ls -alht | head -20'
 alias lsd='ls -al -d * | egrep "^d"'
-alias li='ls -ai1 | sort --color=never'
+alias li='ls -ai1 | sort'
 alias dusk='du -skc * | sort -rn'
 alias nsl='netstat -aln | grep -iv dgram | grep -iv udp | grep -iv stream | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail -n +2'
 alias nsl2='netstat -al | grep -iv dgram | grep -iv udp | grep -iv stream | grep -v CLOSE_WAIT | cut -c-6,21-94 | tail -n +2'
