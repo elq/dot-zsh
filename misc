@@ -124,7 +124,7 @@ unsetopt BG_NICE                # do NOT nice bg commands
 setopt CORRECT                        # command CORRECTION
 
 
-HISTFILE=~/.zsh/hist/zhistory.$HOST
+HISTFILE=~/.zsh/hist/zhistory.neutrino
 HISTSIZE=10000
 SAVEHIST=10000
 
