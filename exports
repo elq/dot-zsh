@@ -11,9 +11,6 @@ export PATH=$PATH:$GOROOT/bin
 #adb
 export PATH=$PATH:~/src/android-sdk-mac/tools
 
-#brew 
-export HOMEBREW_GITHUB_API_TOKEN=6aac532984770e041dc0bf9691a671b9e5ed2b32
-
 
 #i can haz grep colerz?
 export GREP_OPTIONS='--color=auto'
